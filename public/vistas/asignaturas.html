@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -33,7 +33,7 @@
     <main class="main">
       <!-- SIDEBAR -->
       <div class="sidebar">
-        <h2 class="menu-title">Menú de navegación</h2>        
+        <h2 class="menu-title">Menú de navegación</h2>
         <a href="../index.html">Página Principal</a>
         <a href="./estudiantes.html">Estudiantes</a>
         <a href="./notas.html">Notas</a>
@@ -41,10 +41,189 @@
 
       <!-- CONTENIDO PRINCIPAL -->
       <div class="content-main">
-        
-      <h2>Asignaturas</h2>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="mb-0">Asignaturas</h2>
 
+          <button
+            type="button"
+            class="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#modalAsignatura"
+          >
+            + Agregar asignatura
+          </button>
+        </div>
 
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col">Código</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Créditos</th>
+              <th scope="col">Docente</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>001</td>
+              <td>Matemáticas</td>
+              <td>3</td>
+              <td>Prof. Eduardo García</td>
+              <td>Activa</td>
+              <td>
+                <button class="btn btn-primary btn-sm">Editar</button>
+                <button class="btn btn-danger btn-sm">Eliminar</button>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">2</th>
+              <td>002</td>
+              <td>Java - Javascript</td>
+              <td>4</td>
+              <td>Prof. Yeison Betancur</td>
+              <td>Activa</td>
+              <td>
+                <button class="btn btn-primary btn-sm">Editar</button>
+                <button class="btn btn-danger btn-sm">Eliminar</button>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">3</th>
+              <td>003</td>
+              <td>Inglés</td>
+              <td>3</td>
+              <td>Prof. Ana Martínez</td>
+              <td>Inactiva</td>
+              <td>
+                <button class="btn btn-primary btn-sm">Editar</button>
+                <button class="btn btn-danger btn-sm">Eliminar</button>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">4</th>
+              <td>004</td>
+              <td>Habilidades Blandas</td>
+              <td>2</td>
+              <td>Prof. Carlos Mendoza</td>
+              <td>Activa</td>
+              <td>
+                <button class="btn btn-primary btn-sm">Editar</button>
+                <button class="btn btn-danger btn-sm">Eliminar</button>
+              </td>
+            </tr>
+
+            <tr>
+              <th scope="row">5</th>
+              <td>005</td>
+              <td>SQL</td>
+              <td>3</td>
+              <td>Prof. Ana Martínez</td>
+              <td>Activa</td>
+              <td>
+                <button class="btn btn-primary btn-sm">Editar</button>
+                <button class="btn btn-danger btn-sm">Eliminar</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <!-- Modal: Agregar Asignatura -->
+        <div
+          class="modal fade"
+          id="modalAsignatura"
+          tabindex="-1"
+          aria-labelledby="modalAsignaturaLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalAsignaturaLabel">
+                  Agregar asignatura
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Cerrar"
+                ></button>
+              </div>
+
+              <form>
+                <div class="modal-body">
+                  <div class="row g-3">
+                    <div class="col-md-3">
+                      <label class="form-label">Código</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ej: 006"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label">Nombre</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ej: Programación Web"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-3">
+                      <label class="form-label">Créditos</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        min="1"
+                        max="10"
+                        placeholder="Ej: 3"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-8">
+                      <label class="form-label">Docente</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ej: Prof. Laura Pérez"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-4">
+                      <label class="form-label">Estado</label>
+                      <select class="form-select" required>
+                        <option value="Activa" selected>Activa</option>
+                        <option value="Inactiva">Inactiva</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+                  <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
 
