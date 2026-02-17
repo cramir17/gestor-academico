@@ -25,7 +25,7 @@
 
     <title>Mi primera página web</title>
   </head>
-  <body>
+  <body onload="cargarDatos()">
     <header>
       <h1 id="main-title">Panel de Administración 🔤</h1>
     </header>
@@ -54,6 +54,15 @@
         >
           + Agregar estudiante
         </button>
+
+        <div style="text-align: center">
+          <img
+            id="gifContainer"
+            src="../../public/assets/img/otros/Loading_icon.gif"
+            alt="GIF animado"
+            width="300"
+          />
+        </div>
 
         <table class="table" id="tablaEstudiantes">
           <thead>
@@ -106,7 +115,7 @@
                     </div>
 
                     <div class="col-md-6">
-                      <label class="form-label">Nombre</label>
+                      <label class="form-label">Nombre Completo</label>
                       <input
                         type="text"
                         class="form-control"
@@ -116,11 +125,11 @@
                     </div>
 
                     <div class="col-md-6">
-                      <label class="form-label">Apellido</label>
+                      <label class="form-label">Documento</label>
                       <input
                         type="text"
                         class="form-control"
-                        id="apellidoEstudianteModal"
+                        id="documentoEstudianteModal"
                         required
                       />
                     </div>
@@ -134,12 +143,24 @@
                         required
                       />
                     </div>
+                    
+                    <div class="col-md-6">
+                      <label class="form-label">Programa</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="programaEstudianteModal"
+                        required
+                      />
+                    </div>
+
 
                     <div class="col-md-4">
                       <label class="form-label">Estado</label>
                       <select class="form-select" id="estadoEstudianteModal">
                         <option value="Activo" selected>Activo</option>
                         <option value="Inactivo">Inactivo</option>
+                        <option value="Suspendido">Suspendido</option>
                       </select>
                     </div>
                   </div>
@@ -157,7 +178,8 @@
                   <button
                     type="button"
                     class="btn btn-primary"
-                    onclick="guardarEstudiante()"
+                    data-bs-dismiss="modal"
+                    onclick="guardarCambios()"
                   >
                     Guardar
                   </button>

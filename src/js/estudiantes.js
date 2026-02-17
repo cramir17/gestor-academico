@@ -56,7 +56,7 @@ function crearTabla() {
   document.getElementById("gifContainer").style.display = "block";
 
   setTimeout(function () {
-    tbodyHtml.innerHTML = tbody;
+    tbody.innerHTML = tbodyHtml;
     document.getElementById("gifContainer").style.display = "none";
   }, 2000);
 }
@@ -80,13 +80,14 @@ function guardarCambios() {
     agregarEstudiante();
   } else {
     const nombre = document.getElementById("nombreEstudianteModal").value;
-    const matricula = document.getElementById("matriculaEstudianteModal").value;
+    const documento = document.getElementById("documentoEstudianteModal").value;
     const email = document.getElementById("emailEstudianteModal").value;
-    const carrera = document.getElementById("carreraEstudianteModal").value;
+    const programa = document.getElementById("programaEstudianteModal").value;
     const estado = document.getElementById("estadoEstudianteModal").value;
+
     matriz = matriz.map((item) => {
       if (item[0] === id) {
-        return [id, nombre, matricula, email, carrera, estado];
+        return [id, nombre, documento, email, programa, estado];
       }
       return item;
     });
@@ -97,9 +98,9 @@ function guardarCambios() {
 
 function agregarEstudiante() {
   const nombre = document.getElementById("nombreEstudianteModal").value;
-  const matricula = document.getElementById("matriculaEstudianteModal").value;
+  const matricula = document.getElementById("documentoEstudianteModal").value;
   const email = document.getElementById("emailEstudianteModal").value;
-  const carrera = document.getElementById("carreraEstudianteModal").value;
+  const carrera = document.getElementById("programaEstudianteModal").value;
   const estado = document.getElementById("estadoEstudianteModal").value;
   const id = matriz.length > 0 ? matriz[matriz.length - 1][0] + 1 : 1;
   matriz.push([id, nombre, matricula, email, carrera, estado]);
@@ -112,12 +113,24 @@ function editarEstudiante(id) {
   if (estudiante) {
     document.getElementById("idEstudianteModal").value = estudiante[0];
     document.getElementById("nombreEstudianteModal").value = estudiante[1];
-    document.getElementById("matriculaEstudianteModal").value = estudiante[2];
+    document.getElementById("documentoEstudianteModal").value = estudiante[2];
     document.getElementById("emailEstudianteModal").value = estudiante[3];
-    document.getElementById("carreraEstudianteModal").value = estudiante[4];
+    document.getElementById("programaEstudianteModal").value = estudiante[4];
     document.getElementById("estadoEstudianteModal").value = estudiante[5];
 
     let modalTitle = document.getElementById("modalEstudianteLabel");
     modalTitle.textContent = "Editar Estudiante";
   }
+}
+
+function limpiarModal() {
+  document.getElementById("idEstudianteModal").value = "";
+  document.getElementById("nombreEstudianteModal").value = "";
+  document.getElementById("documentoEstudianteModal").value = "";
+  document.getElementById("emailEstudianteModal").value = "";
+  document.getElementById("programaEstudianteModal").value = "";
+  document.getElementById("estadoEstudianteModal").value = "Activo";
+
+  let modalTitle = document.getElementById("modalEstudianteLabel");
+  modalTitle.textContent = "Agregar Estudiante";
 }
