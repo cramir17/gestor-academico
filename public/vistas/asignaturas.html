@@ -21,9 +21,11 @@
       defer
     ></script>
 
+    <script src="../../src/js/asignaturas.js"></script>
+
     <title>Mi primera página web</title>
   </head>
-  <body>
+  <body onload="cargarDatos()">
     <header>
       <h1 id="main-title">Panel de Administración 🔤</h1>
     </header>
@@ -49,15 +51,23 @@
             class="btn btn-success"
             data-bs-toggle="modal"
             data-bs-target="#modalAsignatura"
+            onclick="limpiarModal()"
           >
             + Agregar asignatura
           </button>
         </div>
 
-        <table class="table">
+        <div style="text-align: center">
+          <img id="gifContainer"
+            src="../../public/assets/img/otros/Loading_icon.gif"
+            alt="GIF animado"
+            width="300"
+          />
+        </div>
+
+        <table class="table" id="tablaAsignaturas">
           <thead>
             <tr>
-              <th scope="col">id</th>
               <th scope="col">Código</th>
               <th scope="col">Nombre</th>
               <th scope="col">Créditos</th>
@@ -66,72 +76,8 @@
               <th scope="col">Acciones</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>001</td>
-              <td>Matemáticas</td>
-              <td>3</td>
-              <td>Prof. Eduardo García</td>
-              <td>Activa</td>
-              <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Eliminar</button>
-              </td>
-            </tr>
 
-            <tr>
-              <th scope="row">2</th>
-              <td>002</td>
-              <td>Java - Javascript</td>
-              <td>4</td>
-              <td>Prof. Yeison Betancur</td>
-              <td>Activa</td>
-              <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Eliminar</button>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">3</th>
-              <td>003</td>
-              <td>Inglés</td>
-              <td>3</td>
-              <td>Prof. Ana Martínez</td>
-              <td>Inactiva</td>
-              <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Eliminar</button>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">4</th>
-              <td>004</td>
-              <td>Habilidades Blandas</td>
-              <td>2</td>
-              <td>Prof. Carlos Mendoza</td>
-              <td>Activa</td>
-              <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Eliminar</button>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">5</th>
-              <td>005</td>
-              <td>SQL</td>
-              <td>3</td>
-              <td>Prof. Ana Martínez</td>
-              <td>Activa</td>
-              <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Eliminar</button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody id="tbodyAsignaturas"></tbody>
         </table>
         <!-- Modal: Agregar Asignatura -->
         <div
@@ -145,7 +91,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="modalAsignaturaLabel">
-                  Agregar asignatura
+                  Editar asignatura
                 </h5>
                 <button
                   type="button"
@@ -158,12 +104,13 @@
               <form>
                 <div class="modal-body">
                   <div class="row g-3">
-                    <div class="col-md-3">
-                      <label class="form-label">Código</label>
+                    <div class="col-md-6">
+                      <label class="form-label">Id</label>
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Ej: 006"
+                        readonly
+                        id="idModal"
                         required
                       />
                     </div>
@@ -174,6 +121,7 @@
                         type="text"
                         class="form-control"
                         placeholder="Ej: Programación Web"
+                        id="nombreModal"
                         required
                       />
                     </div>
@@ -186,6 +134,7 @@
                         min="1"
                         max="10"
                         placeholder="Ej: 3"
+                        id="creditosModal"
                         required
                       />
                     </div>
@@ -196,13 +145,14 @@
                         type="text"
                         class="form-control"
                         placeholder="Ej: Prof. Laura Pérez"
+                        id="docenteModal"
                         required
                       />
                     </div>
 
                     <div class="col-md-4">
                       <label class="form-label">Estado</label>
-                      <select class="form-select" required>
+                      <select class="form-select" required id="estadoModal">
                         <option value="Activa" selected>Activa</option>
                         <option value="Inactiva">Inactiva</option>
                       </select>
@@ -218,7 +168,14 @@
                   >
                     Cancelar
                   </button>
-                  <button type="submit" class="btn btn-primary">Guardar</button>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    data-bs-dismiss="modal"
+                    onclick="guardarCambios()"
+                  >
+                    Guardar
+                  </button>
                 </div>
               </form>
             </div>

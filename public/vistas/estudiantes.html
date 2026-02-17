@@ -21,6 +21,8 @@
       defer
     ></script>
 
+    <script src="../../src/js/estudiantes.js"></script>
+
     <title>Mi primera página web</title>
   </head>
   <body>
@@ -43,7 +45,17 @@
       <div class="content-main">
         <h2>Estudiantes</h2>
 
-        <table class="table">
+        <button
+          type="button"
+          class="btn btn-success"
+          data-bs-toggle="modal"
+          data-bs-target="#modalEstudiante"
+          onclick="limpiarModal()"
+        >
+          + Agregar estudiante
+        </button>
+
+        <table class="table" id="tablaEstudiantes">
           <thead>
             <tr>
               <th scope="col">id</th>
@@ -55,73 +67,147 @@
               <th scope="col">Acciones</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Mark Johnson</td>
-              <td>1111</td>
-              <td>mark.johnson@gmail.com</td>
-              <td>Ingeniería de Sistemas</td>
-              <td>Activo</td>
-              <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Eliminar</button>
-              </td>
-            </tr>
 
-            <tr>
-              <th scope="row">2</th>
-              <td>Laura Gómez</td>
-              <td>2222</td>
-              <td>laura.gomez@gmail.com</td>
-              <td>Administración de Empresas</td>
-              <td>Activo</td>
-              <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Eliminar</button>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">3</th>
-              <td>Juan Pérez</td>
-              <td>3333</td>
-              <td>juan.perez@gmail.com</td>
-              <td>Contaduría Pública</td>
-              <td>Inactivo</td>
-              <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Eliminar</button>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">4</th>
-              <td>Camila Torres</td>
-              <td>4444</td>
-              <td>camila.torres@gmail.com</td>
-              <td>Diseño Gráfico</td>
-              <td>Activo</td>
-              <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Eliminar</button>
-              </td>
-            </tr>
-
-            <tr>
-              <th scope="row">5</th>
-              <td>Andrés Ramírez</td>
-              <td>5555</td>
-              <td>andres.ramirez@gmail.com</td>
-              <td>Ingeniería Industrial</td>
-              <td>Suspendido</td>
-              <td>
-                <button class="btn btn-primary btn-sm">Editar</button>
-                <button class="btn btn-danger btn-sm">Eliminar</button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody id="tbodyEstudiantes"></tbody>
         </table>
+
+        <!-- Modal: Agregar / Editar Estudiante -->
+        <div
+          class="modal fade"
+          id="modalEstudiante"
+          tabindex="-1"
+          aria-labelledby="modalEstudianteLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalEstudianteLabel">
+                  Agregar / Editar estudiante
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                ></button>
+              </div>
+
+              <form>
+                <div class="modal-body">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label">ID</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="idEstudianteModal"
+                        readonly
+                      />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label">Nombre</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="nombreEstudianteModal"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label">Apellido</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="apellidoEstudianteModal"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label">Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="emailEstudianteModal"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-4">
+                      <label class="form-label">Estado</label>
+                      <select class="form-select" id="estadoEstudianteModal">
+                        <option value="Activo" selected>Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    onclick="guardarEstudiante()"
+                  >
+                    Guardar
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- Modal Confirmar Eliminación -->
+        <div
+          class="modal fade"
+          id="modalEliminarEstudiante"
+          tabindex="-1"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Confirmar eliminación</h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                ></button>
+              </div>
+
+              <div class="modal-body">
+                ¿Seguro que deseas eliminar este estudiante?
+              </div>
+
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Cancelar
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  onclick="confirmarEliminarEstudiante()"
+                >
+                  Eliminar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
 
