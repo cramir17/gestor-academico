@@ -21,9 +21,11 @@
       defer
     ></script>
 
+    <script src="../../src/js/notas.js"></script>
+
     <title>Mi primera página web</title>
   </head>
-  <body>
+  <body onload="cargarDatos()">
     <header>
       <h1 id="main-title">Panel de Administración 🔤</h1>
     </header>
@@ -54,47 +56,32 @@
           </button>
         </div>
 
-        <div class="table-responsive">
-          <table class="table table-hover align-middle">
-            <thead class="table-dark">
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Estudiante</th>
-                <th scope="col">Asignatura</th>
-                <th scope="col">Nota</th>
-                <th scope="col">Fecha</th>
-                <th scope="col">Observación</th>
-                <th scope="col">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Laura Gómez</td>
-                <td>Matemáticas</td>
-                <td>4.5</td>
-                <td>2026-02-12</td>
-                <td>Buen desempeño</td>
-                <td>
-                  <button class="btn btn-primary btn-sm">Editar</button>
-                  <button class="btn btn-danger btn-sm">Eliminar</button>
-                </td>
-              </tr>
+        <div style="text-align: center">
+          <img
+            id="gifContainer"
+            src="../../public/assets/img/otros/Loading_icon.gif"
+            alt="GIF animado"
+            width="300"
+          />
+        </div>
 
-              <tr>
-                <th scope="row">2</th>
-                <td>Juan Pérez</td>
-                <td>SQL</td>
-                <td>3.8</td>
-                <td>2026-02-10</td>
-                <td>Mejorar consultas JOIN</td>
-                <td>
-                  <button class="btn btn-primary btn-sm">Editar</button>
-                  <button class="btn btn-danger btn-sm">Eliminar</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <table class="table" id="tablaNotas">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Estudiante</th>
+              <th scope="col">Asignatura</th>
+              <th scope="col">Nota</th>
+              <th scope="col">Fecha</th>
+              <th scope="col">Observación</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+
+          <tbody id="tbodyNotas"></tbody>
+        </table>
+
+                <!-- Modal: Agregar Nota -->
 
           <div
             class="modal fade"
@@ -116,20 +103,31 @@
                   ></button>
                 </div>
 
-                <form>
-                  <div class="modal-body">
-                    <div class="row g-3">
-                      <div class="col-md-6">
-                        <label class="form-label">Estudiante</label>
-                        <select class="form-select" required>
-                          <option value="" disabled selected>
-                            Seleccione un estudiante
-                          </option>
-                          <option>Laura Gómez</option>
-                          <option>Juan Pérez</option>
-                          <option>Camila Torres</option>
-                        </select>
-                      </div>
+
+              <form>
+                <div class="modal-body">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label">Id</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        readonly
+                        id="idModal"
+                        required
+                      />
+                    </div>
+
+                    <div class="col-md-6">
+                      <label class="form-label">Estudiante</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Ej: Laura Gómez"
+                        id="estudianteModal"
+                        required
+                      />
+                    </div>
 
                       <div class="col-md-6">
                         <label class="form-label">Asignatura</label>

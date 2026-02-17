@@ -43,17 +43,19 @@
 
       <!-- CONTENIDO PRINCIPAL -->
       <div class="content-main">
-        <h2>Estudiantes</h2>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="mb-0"> Estudiantes</h2>
 
-        <button
-          type="button"
-          class="btn btn-success"
-          data-bs-toggle="modal"
-          data-bs-target="#modalEstudiante"
-          onclick="limpiarModal()"
-        >
-          + Agregar estudiante
-        </button>
+          <button
+            type="button"
+            class="btn btn-success"
+            data-bs-toggle="modal"
+            data-bs-target="#modalEstudiante"
+            onclick="limpiarModal()"
+          >
+            + Agregar estudiante
+          </button>
+        </div>
 
         <div style="text-align: center">
           <img
@@ -143,7 +145,7 @@
                         required
                       />
                     </div>
-                    
+
                     <div class="col-md-6">
                       <label class="form-label">Programa</label>
                       <input
@@ -153,7 +155,6 @@
                         required
                       />
                     </div>
-
 
                     <div class="col-md-4">
                       <label class="form-label">Estado</label>
